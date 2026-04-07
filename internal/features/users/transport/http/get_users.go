@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	core_logger "github.com/adelineshack/todolist-go/internal/core/logger"
+	core_http_request "github.com/adelineshack/todolist-go/internal/core/transport/http/request"
 	core_http_response "github.com/adelineshack/todolist-go/internal/core/transport/http/response"
-	core_http_utils "github.com/adelineshack/todolist-go/internal/core/transport/http/utils"
 )
 
 type GetUsersResponse []UserDTOResponse
@@ -47,13 +47,19 @@ func (h *UsersHTTPHandler) GetUsers(
 }
 
 func getLimitOffsetQueryParams(r *http.Request) (*int, *int, error) {
-	limit, err := core_http_utils.GetIntQueryParam(r, "limit")
+
+	const (
+		limitQueryParamkey  = "limit"
+		offsetQueryParamKey = "offset"
+	)
+
+	limit, err := core_http_request.GetIntQueryParam(r, limitQueryParamkey)
 
 	if err != nil {
 		return nil, nil, fmt.Errorf("get 'limit' query param: %w", err)
 	}
 
-	offset, err := core_http_utils.GetIntQueryParam(r, "offset")
+	offset, err := core_http_request.GetIntQueryParam(r, offsetQueryParamKey)
 
 	if err != nil {
 		return nil, nil, fmt.Errorf("get 'offset' query param: %w", err)
