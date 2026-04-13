@@ -7,7 +7,7 @@ import (
 	"github.com/adelineshack/todolist-go/internal/core/domain"
 )
 
-func (r TasksRepository) GetTasks(
+func (r *TasksRepository) GetTasks(
 	ctx context.Context,
 	userID *int,
 	limit *int,
@@ -22,7 +22,7 @@ func (r TasksRepository) GetTasks(
 	%s
 	ORDER BY id ASC
 	LIMIT $1
-	OFFSET $2
+	OFFSET $2;
 	`
 
 	args := []any{limit, offset}

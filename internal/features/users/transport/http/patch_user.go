@@ -22,14 +22,14 @@ func (r *PatchUserRequest) Validate() error {
 		if r.FullName.Value == nil {
 			return fmt.Errorf("FullName can't be NULL")
 		}
-	}
 
-	fullNameLength := len([]rune(*r.FullName.Value))
+		fullNameLength := len([]rune(*r.FullName.Value))
 
-	if fullNameLength < 3 || fullNameLength > 100 {
-		return fmt.Errorf(
-			"FullName must be between 3 and 100 symbols",
-		)
+		if fullNameLength < 3 || fullNameLength > 100 {
+			return fmt.Errorf(
+				"FullName must be between 3 and 100 symbols",
+			)
+		}
 	}
 
 	if r.PhoneNumber.Set {
