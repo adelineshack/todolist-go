@@ -11,7 +11,6 @@ func (s *TasksService) GetTask(
 	ctx context.Context,
 	id int,
 ) (domain.Task, error) {
-
 	task, err := s.tasksRepository.GetTask(
 		ctx,
 		id,
